@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Контроль введення даних</title>
+    <link rel="stylesheet" href="style1.css">
+	<style>
+		input {
+			font-size: 18px;
+			padding: 5px;
+			margin-bottom: 10px;
+		}
+		p {
+			font-size: 16px;
+			color: rgb(100, 176, 72);
+			display: none;
+		}
+		ul {
+			margin-top: 20px;
+			list-style: none;
+			padding-left: 0;
+		}
+		li {
+			font-size: 18px;
+			padding: 5px;
+			border: 1px solid #d1c4c4;
+			margin-bottom: 5px;
+			position: relative;
+		}
+		li button {
+			position: absolute;
+			top: 0;
+			right: 0;
+			padding: 5px 10px;
+			background-color: #6a3ce7;
+			color: #fff;
+			border: none;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<label>Введіть число: </label>
+	<input type="number" id="numberInput">
+	<p id="duplicateMessage">Це число вже введено!</p>
+
+	<ul id="numberList"></ul>
+
+	<script>
+		let numbers = [];
+
+
+		const numberInput = document.getElementById('numberInput');
+		const duplicateMessage = document.getElementById('duplicateMessage');
+		const numberList = document.getElementById('numberList');
+
+		numberInput.addEventListener('keyup', function() {
+		
+			const number = parseInt(this.value);
+			if (numbers.includes(number)) {
+				duplicateMessage.style.display = 'block';
+			} else {
+				duplicateMessage.style.display = 'none';
+				numbers.push(number);
+				addNumberToList(number);
+				this.value = ''; 
+			}
+		});
+
+		function addNumberToList(number) {
+			const li = document.createElement('li');
+			li.textContent = number;
+			const button = document.createElement('button');
+			button.textContent = 'Видалити';
+			button.addEventListener('click', function() {
+				deleteNumberFromList(number, li);
+			});
+			li.appendChild(button);
+			numberList.appendChild(li);
+		}
+
+		function deleteNumberFromList(number, li) {
+			numbers = numbers.filter(n => n !== number);
+			numberList.removeChild(li);
+		}
+	</script>
+    <script src="script.js"></script>
+</body>
+</html>
