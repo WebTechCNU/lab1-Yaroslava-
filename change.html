@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Заміна першої літери</title>
+    <link rel="stylesheet" href="style1.css">
+	<script>
+		function capitalizeSentences() {
+			var inputText = document.getElementById("input-text").value;
+			var sentences = inputText.split(". ");
+			for (var i = 0; i < sentences.length; i++) {
+				var firstLetter = sentences[i].charAt(0);
+				if (firstLetter === firstLetter.toLowerCase()) {
+					sentences[i] = firstLetter.toUpperCase() + sentences[i].slice(1);
+				}
+			}
+			document.getElementById("output-text").innerHTML = sentences.join(". ");
+		}
+	</script>
+</head>
+<body>
+	<label for="input-text">Введіть текст:</label><br>
+	<textarea id="input-text"></textarea><br>
+	<button onclick="capitalizeSentences()">Змінити першу літеру</button><br>
+	<label for="output-text">Результат:</label><br>
+	<textarea id="output-text"></textarea>
+    <script src="script.js"></script>
+</body>
+</html>
